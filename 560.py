@@ -1,5 +1,6 @@
 from view import *
 from ranking import *
+from visualization import *
 
 #ask user for choice of fine and open file
 filenum=input("There are two files including data about medals of Olympic Games. Please enter 1 to view data about Winter Olympic Games, or enter 2 to view data about Summer Olympic Games: ")
@@ -38,7 +39,7 @@ summary_for_view=sort_summary(summary_for_view)
 
 #display background information of the data set
 while True:
-    first_step=input("This data set consists of information about medals of Olympic Games. Enter 1 to view rankings of all countries on medals winning by year/sport/gender/medal. Enter 2 to select and view detailed data by year/city/sport/discipline/event/gender/medal/NOC: ")
+    first_step=input("This data set consists of information about medals of Olympic Games. Enter 1 to view rankings of all countries on medals winning by year/sport/gender/medal. Enter 2 to select and view detailed data by year/city/sport/discipline/event/gender/medal/NOC. Enter 3 to view bar charts/line graphs: ")
     print("**"*20)
 #if user choose to view ranking
     if int(first_step)==1:
@@ -60,7 +61,9 @@ while True:
         print_ranking_data(index_line1,selected_table)
 
         #print formatted ranking
-        count_total_metals(selected_table)
+        count_total_metals(selected_table,1)
+
+        #print bar chart of top 10 NOC
 
 #if user choose to view detailed data
     elif int(first_step)==2:
@@ -82,7 +85,21 @@ while True:
 
         #print result
         print_selected_data(all_select,index_line1,result_rows)
+    elif int(first_step)==3:
+        #ask user whether view line graph or bar chart
 
+        second_step=input("View line graph of medals won by two NOC over history, enter 1. View top 10 NOC win most medals in one specific year, enter 2:")
+
+        #if line graph
+        if int(second_step)==1:
+            line_graph(summary_for_view,words_table)
+
+        #if bar chart
+        elif int(second_step)==2:
+            bar_graph(summary_for_view,words_table)
+
+        else:
+            print("Invalid input. Please enter again.")
     else:
         print("Invalid Input. Please enter again.")
     print("**"*20)

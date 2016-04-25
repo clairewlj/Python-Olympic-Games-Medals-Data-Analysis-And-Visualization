@@ -1,5 +1,7 @@
 #module for ranking
 from setup import *
+import numpy as np
+import matplotlib.pyplot as plt
 
 #ask user to select subtypes of selected types for ranking
 def select_subtype(choice_1,summary_for_ranking,rank_choices):
@@ -90,7 +92,7 @@ def print_ranking_data(index_line1,selected_table):
     print("**"*20)
 
 #function to count numbers of medals and print formatted ranking
-def count_total_metals(selected_table):
+def count_total_metals(selected_table,num):
     NOC_rank={}
     medals=["Total","Gold","Silver","Bronze"]
     for line in selected_table:
@@ -112,27 +114,59 @@ def count_total_metals(selected_table):
         for medal in NOC_rank[NOC]:
             rank_rows[i].append(medal)
         i+=1
-
     while True:
         print("**"*20)
-        print_menu(medals)
-        view_input=input("Please enter the index of one ranking criterion and view the result, or enter q to quit:")
-        if view_input=="q" or view_input=="Q":
-            break
-        else:
-            try:
-                view_input=int(view_input)
-                rank_rows.sort(key=lambda x: x[view_input+1],reverse=True)
+        if num==1:
+            print_menu(medals)
+            view_input=input("Please enter the index of one ranking criterion and view the result, or enter q to quit:")
+            if view_input=="q" or view_input=="Q":
+                break
+            else:
+                try:
+                    view_input=int(view_input)
+                    rank_rows.sort(key=lambda x: x[view_input+1],reverse=True)
+                    print("**"*20)
+                    print("NOC","Total","Gold","Silver","Bronze")
+                    #for printing out correctly: all integers need to be transfered to string
+                    newlist=[]
+                    for i in range(len(rank_rows)):
+                        newlist.append([])
+                        for item in rank_rows[i]:
+                            newlist[i].append(str(item))
+                    for line in newlist:
+                        print(' '.join(line))
+                except:
+                    print("Invalid input. Please enter again.")
+        elif num==3:
+            #ask user to show bar chart of total/gold/silver/bronze
+            print_menu(medals)
+            third_step=input("Please enter the index of the specific medal to plot bar chart, or enter q to quit: ")
+            if third_step=="q" or third_step=="Q":
+                break
+            else:
+                try:
+                    third_step=int(third_step)
+                    rank_rows.sort(key=lambda x: x[third_step+1],reverse=True)
+                    newlist=rank_rows[0:10]
+                    #plot a bar chart
+                    data_for_plot=[]
+                    plot_names=[]
+                    for NOC in newlist:
+                        data_for_plot.append(int(NOC[third_step+1]))
+                        plot_names.append(NOC[0])
+                    plot_names=tuple(plot_names)
+
+                    y_pos=np.arange(10)
+                    y_label=medals[third_step]
+                    bar_width=0.5
+
+                    plt.bar(y_pos,data_for_plot,bar_width,alpha=0.5,color='b')
+                    plt.ylabel(y_label)
+                    plt.xlabel("NOC")
+                    plt.title('Top 10 NOC')
+                    plt.xticks(y_pos+0.2,plot_names)
+
+                    plt.show()
+                except:
+                    print("Invalid input. Please enter again.")
                 print("**"*20)
-                print("NOC","Total","Gold","Silver","Bronze")
-                #for printing out correctly: all integers need to be transfered to string
-                newlist=[]
-                for i in range(len(rank_rows)):
-                    newlist.append([])
-                    for item in rank_rows[i]:
-                        newlist[i].append(str(item))
-                for line in newlist:
-                    print(' '.join(line))
-                print("**"*20)
-            except:
-                print("Invalid input. Please enter again.")

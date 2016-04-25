@@ -60,4 +60,3 @@ def clean_table(levels):
         if item!=[] and item !={}:
             cleaned_levels.append(item)
     return cleaned_levels
-
