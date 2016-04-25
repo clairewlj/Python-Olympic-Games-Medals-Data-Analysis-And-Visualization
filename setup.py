@@ -1,7 +1,7 @@
 #basic set up and table create
 
 #function to create summary table for displaying basic menu for selecting
-def create_summary_table(index_line1,words_table):
+def create_summary_dict(index_line1,words_table):
     summary_1=dict()
     for category in index_line1:
         if category!= 'Sport' and category!= 'Discipline' and category!= 'Event':
@@ -60,3 +60,4 @@ def clean_table(levels):
         if item!=[] and item !={}:
             cleaned_levels.append(item)
     return cleaned_levels
+

@@ -1,10 +1,22 @@
-from helper import *
+from view import *
+from ranking import *
 
-with open("Olympics2.csv") as f:
+#ask user for choice of fine and open file
+filenum=input("There are two files including data about medals of Olympic Games. Please enter 1 to view data about Winter Olympic Games, or enter 2 to view data about Summer Olympic Games: ")
+while True:
+    if int(filenum)==1:
+        filename="Olympics1.csv"
+        break
+    elif int(filenum)==2:
+        filename="Olympics2.csv"
+        break
+    else:
+        print("Invalid input. Please enter again.")
+with open(filename) as f:
     words_lines=f.readlines()
-words_table=[]
 
 #create table of data
+words_table=[]
 for line in words_lines:
     line=line.strip()
     words_table.append(line.split(';'))
@@ -17,95 +29,60 @@ for cat in index_line1:
         index_line2.append(cat)
 words_table=words_table[1:]
 
-#create lists/dicts for information displaying
-summary_1=create_summary_table(index_line1,words_table)
+#create lists/dicts for information displaying, and create summary list as index for ranking
+summary_for_view=create_summary_dict(index_line1,words_table)
+summary_for_ranking=[summary_for_view['Year'],list_keys(summary_for_view['Sport']),summary_for_view['Event gender'],summary_for_view['Medal']]
 
-#sort the values following alphabet order in the lists in summary_1
-summary_1=sort_summary(summary_1)
+#sort the values following alphabet order in the lists in summary_for_view
+summary_for_view=sort_summary(summary_for_view)
 
 #display background information of the data set
 while True:
-    print("This data set consists of information about medals of Olympic Games. Below are the variables included:")
-    #display asked information
-    levels=[]
-    for i in range(6):
-        if i != 2:
-            levels.append([])
-        else:
-            levels.append({})
-    all_select=select_level1(words_table,summary_1,index_line2,levels)
+    first_step=input("This data set consists of information about medals of Olympic Games. Enter 1 to view rankings of all countries on medals winning by year/sport/gender/medal. Enter 2 to select and view detailed data by year/city/sport/discipline/event/gender/medal/NOC: ")
+    print("**"*20)
+#if user choose to view ranking
+    if int(first_step)==1:
+        rank_row_names=['Year','Sport','Gender','Medal']
 
-    #display choice
-    if all_select!=[]:
-        pass
+        #ask for user's choices to select data for ranking
+        rank_choices=select_ranking_types(rank_row_names,summary_for_ranking)
+
+        #print choices
+        print_selected_ranking(rank_choices,rank_row_names)
+
+        #re-start if choose nothing to rank
+        if all(rank_choices):
+            continue
+        #select data rows based on user's choices
+        selected_table=select_ranking_data(rank_choices,words_table)
+
+        #printing selected data
+        print_ranking_data(index_line1,selected_table)
+
+        #print formatted ranking
+        count_total_metals(selected_table)
+
+#if user choose to view detailed data
+    elif int(first_step)==2:
+
+        #create list to store user's choices for further data selecting
+        levels=create_levels()
+
+        #ask user to select types of data interested in
+        all_select=select_level1(words_table,summary_for_view,index_line2,levels)
+
+        #display user's choices
+        display_selected_choices(all_select,levels,index_line2)
+
+        #clean choice list for extracting data rows out of original table
+        cleaned_levels=clean_table(levels)
+
+        #select result rows
+        result_rows=select_result_rows(words_table,cleaned_levels)
+
+        #print result
+        print_selected_data(all_select,index_line1,result_rows)
+
     else:
-        print("\nYou have chosen:")
-        i=0
-        while i<=5:
-            item=levels[i]
-            if item==[]:
-                print(index_line2[i],": ","NA")
-            elif item=={}:
-                print(index_line2[i],": ","NA")
-            else:
-                if i != 2:
-                    if len(item)==1:
-                        print(index_line2[i],": ",item[0])
-                    else:
-                        print(index_line2[i],": ",', '.join(item))
-                else:
-                    print("Sport: ")
-                    sport_chosen=list_keys(levels[2])
-                    for sport in sport_chosen:
-                        print("  ",sport,": ",)
-                        discipline_chosen=list_keys(levels[2][sport])
-                        for disp in discipline_chosen:
-                            if len(levels[2][sport][disp])==1:
-                                print("    ",disp,": ",levels[2][sport][disp][0])
-                            else:
-                                events_chosen=', '.join(levels[2][sport][disp])
-                                print("    ",disp,": ",events_chosen)
-            i=i+1
-
-    #clean choice list
-    cleaned_levels=clean_table(levels)
-
-    #select result rows
-    result_rows=[]
-    for line in words_table:
-        values=[]
-        for item in cleaned_levels:
-            if type(item)==type([]):
-                item_in_line=[]
-                for value in item:
-                    value_in_line=value in line
-                    item_in_line.append(value_in_line)
-                values.append(any(item_in_line))
-            else:
-                sport_in_line=False
-                sport_in_line=[]
-                for sport in item:
-                    if line[2]==sport:
-                        for disp in item[sport]:
-                            if line[3]==disp:
-                                if line[4] in item[sport][disp]:
-                                    sport_in_line=True
-                values.append(sport_in_line)
-        if all(values):
-            result_rows.append(line)
-
-    #print result
-    print("\nSelected data:")
-    if all_select!=[]:
-        for row in all_select:
-            print(' '.join(row))
-        print("**"*20)
-        print("Total:",len(all_select),"lines.")
-        print("**"*20)
-    else:
-        print(' '.join(index_line1))
-        for row in result_rows:
-            print(' '.join(row))
-        print("**"*20)
-        print("Total:",len(result_rows),"lines.")
-        print("**"*20)
+        print("Invalid Input. Please enter again.")
+    print("**"*20)
