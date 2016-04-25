@@ -1,6 +1,5 @@
 from ranking import count_total_metals
 from setup import *
-import numpy as np
 import matplotlib.pyplot as plt
 
 def line_graph(summary_for_view,words_table):
