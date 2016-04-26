@@ -159,14 +159,15 @@ def count_total_metals(selected_table,num):
                     y_pos=np.arange(10)
                     y_label=medals[third_step]
                     bar_width=0.5
-
+                    plot_title="Top 10 NOC Of "+y_label
                     plt.bar(y_pos,data_for_plot,bar_width,alpha=0.5,color='b')
                     plt.ylabel(y_label)
                     plt.xlabel("NOC")
-                    plt.title('Top 10 NOC')
+                    plt.title(plot_title)
                     plt.xticks(y_pos+0.2,plot_names)
 
-                    plt.show()
+                    plot_name=plot_title+".png"
+                    plt.savefig(plot_name)
                 except:
                     print("Invalid input. Please enter again.")
                 print("**"*20)

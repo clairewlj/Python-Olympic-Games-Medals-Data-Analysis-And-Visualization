@@ -34,7 +34,8 @@ def line_graph(summary_for_view,words_table):
             title_NOC="Medals won by "+NOC1_to_plot+" & "+NOC2_to_plot
             plt.title(title_NOC)
             plt.legend()
-            plt.show()
+            plot_name=title_NOC+".png"
+            plt.savefig(plot_name)
         except:
             print("Invalid input. Please enter again.")
     except:

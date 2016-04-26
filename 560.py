@@ -1,18 +1,26 @@
 from view import *
+import matplotlib
+matplotlib.use('AGG')
 from ranking import *
 from visualization import *
 
 #ask user for choice of fine and open file
-filenum=input("There are two files including data about medals of Olympic Games. Please enter 1 to view data about Winter Olympic Games, or enter 2 to view data about Summer Olympic Games: ")
+print("This program is for analyzing data about Sports games. Files suitable for this program should include columns with the same names and order as shown below:")
+print("'Year','City','Sport','Discipline','Event','Event Gender','Medal','NOC'")
+print("Each type of 'Sport' consists of different types of 'Discipline', and Each type of 'Discipline' consists of different 'Event'.")
+filenum=input("There are two files including data about medals of Olympic Games. Please enter 1 to view data about Winter Olympic Games, or enter 2 to view data about Summer Olympic Games, or upload your own file and enter the filename: ")
 while True:
-    if int(filenum)==1:
+    if filenum=="1":
         filename="Olympics1.csv"
         break
-    elif int(filenum)==2:
+    elif filenum=="2":
         filename="Olympics2.csv"
         break
     else:
-        print("Invalid input. Please enter again.")
+        try:
+            filename=filenum
+        except:
+            print("Invalid input. Please enter again.")
 with open(filename) as f:
     words_lines=f.readlines()
 
@@ -42,7 +50,7 @@ while True:
     first_step=input("This data set consists of information about medals of Olympic Games. Enter 1 to view rankings of all countries on medals winning by year/sport/gender/medal. Enter 2 to select and view detailed data by year/city/sport/discipline/event/gender/medal/NOC. Enter 3 to view bar charts/line graphs: ")
     print("**"*20)
 #if user choose to view ranking
-    if int(first_step)==1:
+    if first_step=="1":
         rank_row_names=['Year','Sport','Gender','Medal']
 
         #ask for user's choices to select data for ranking
@@ -66,7 +74,7 @@ while True:
         #print bar chart of top 10 NOC
 
 #if user choose to view detailed data
-    elif int(first_step)==2:
+    elif first_step=="2":
 
         #create list to store user's choices for further data selecting
         levels=create_levels()
@@ -85,19 +93,19 @@ while True:
 
         #print result
         print_selected_data(all_select,index_line1,result_rows)
-    elif int(first_step)==3:
+    elif first_step=="3":
         #ask user whether view line graph or bar chart
-
-        second_step=input("View line graph of medals won by two NOC over history, enter 1. View top 10 NOC win most medals in one specific year, enter 2:")
+        second_step=input("View line graph of medals won by two NOC over history, enter 1. View top 10 NOC win most medals in one specific year, enter 2. Retern to previous menu, enter q:")
 
         #if line graph
-        if int(second_step)==1:
+        if second_step=="1":
             line_graph(summary_for_view,words_table)
-
         #if bar chart
-        elif int(second_step)==2:
+        elif second_step=="2":
             bar_graph(summary_for_view,words_table)
-
+        elif second_step=="q" or second_step=="Q":
+            print("**"*20)
+            continue
         else:
             print("Invalid input. Please enter again.")
     else:
