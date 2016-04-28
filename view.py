@@ -17,7 +17,7 @@ def select_level1(words_table,summary_1,index_line2,levels):
     while True:
         print("No.","Variable")
         print_menu(index_line2)
-        input_level1=input("Please enter the index of the variable for further selecting, enter 'a' to select all data and quit search, or enter q to directly quit search: ")
+        input_level1=input("Please enter the index of the variable for further selecting, or enter 'a' to select all data and quit search, or enter q to directly quit search: ")
         if input_level1=="q" or input_level1=="Q":
             break
         elif input_level1=="a" or input_level1=="A":

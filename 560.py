@@ -7,7 +7,7 @@ from visualization import *
 #ask user for choice of fine and open file
 print("This program is for analyzing data about Sports games. Files suitable for this program should include columns with the same names and order as shown below:")
 print("'Year','City','Sport','Discipline','Event','Event Gender','Medal','NOC'")
-print("Each type of 'Sport' consists of different types of 'Discipline', and Each type of 'Discipline' consists of different 'Event'.")
+print("Each type of 'Sport' consists of different types of 'Discipline', and Each type of 'Discipline' consists of different 'Event'. If you want to upload your own file, please make sure that the variables in your data file are with the same order and names strictly.")
 filenum=input("There are two files including data about medals of Olympic Games. Please enter 1 to view data about Winter Olympic Games, or enter 2 to view data about Summer Olympic Games, or upload your own file and enter the filename: ")
 while True:
     if filenum=="1":
@@ -47,7 +47,7 @@ summary_for_view=sort_summary(summary_for_view)
 
 #display background information of the data set
 while True:
-    first_step=input("This data set consists of information about medals of Olympic Games. Enter 1 to view rankings of all countries on medals winning by year/sport/gender/medal. Enter 2 to select and view detailed data by year/city/sport/discipline/event/gender/medal/NOC. Enter 3 to view bar charts/line graphs: ")
+    first_step=input("This data set consists of information about medals of Olympic Games. Enter 1 to view rankings of all countries on medals winning by year/sport/gender/medal type. Enter 2 to select and view detailed data by year/city/sport/discipline/event/gender/medal/NOC. Enter 3 to view bar charts/line graphs of selected data: ")
     print("**"*20)
 #if user choose to view ranking
     if first_step=="1":
