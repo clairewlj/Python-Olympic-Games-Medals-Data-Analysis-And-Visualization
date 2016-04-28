@@ -42,6 +42,7 @@ def select_level1(words_table,summary_1,index_line2,levels):
                                 print("**"*20)
                                 input_level2=int(input_level2)
                                 add_if_not_in(summary_1[level1_name][input_level2],levels[input_level1])
+                                re_select=input("Please enter anything to return to the menu to select another or quit search.")
                             except:
                                 print("Invalid Input. Please enter again")
                 else:
@@ -114,6 +115,7 @@ def select_event(input_level1,levels,summary_1,event_names,discipline_name,sport
                 input_level4=int(input_level4)
                 event_name=event_names[input_level4]
                 add_if_not_in(event_name,levels[input_level1][sport_name][discipline_name])
+                re_select=input("Please enter anything to return to the menu to select another or quit search.")
             except:
                 print("Invalid Input. Please enter again.")
         print("**"*20)
@@ -121,7 +123,7 @@ def select_event(input_level1,levels,summary_1,event_names,discipline_name,sport
 #display choices
 def display_selected_choices(all_select,levels,index_line2):
     if all_select!=[]:
-                pass
+        pass
     else:
         print("\nYou have chosen:")
         i=0

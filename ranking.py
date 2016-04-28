@@ -18,6 +18,7 @@ def select_subtype(choice_1,summary_for_ranking,rank_choices):
             try:
                 choice_2=int(choice_2)
                 add_if_not_in(summary_for_ranking[choice_1][choice_2],rank_choices[choice_1])
+                re_select=input("Please enter anything to return to the menu to select another or quit search.")
             except:
                 print("Invalid Input. Please enter again.")
         print("**"*20)
@@ -118,6 +119,7 @@ def count_total_metals(selected_table,num):
         print("**"*20)
         if num==1:
             print_menu(medals)
+            print("**"*20)
             view_input=input("Please enter the index of one ranking criterion and view the result, or enter q to quit:")
             if view_input=="q" or view_input=="Q":
                 break
@@ -135,11 +137,13 @@ def count_total_metals(selected_table,num):
                             newlist[i].append(str(item))
                     for line in newlist:
                         print(' '.join(line))
+                    re_select=input("Please enter anything to return to the menu to select another or quit search.")
                 except:
                     print("Invalid input. Please enter again.")
         elif num==3:
             #ask user to show bar chart of total/gold/silver/bronze
             print_menu(medals)
+            print("**"*20)
             third_step=input("Please enter the index of the specific medal to plot a bar chart related, or enter q to quit. The graph  will be saved under current directory: ")
             if third_step=="q" or third_step=="Q":
                 break
@@ -168,6 +172,7 @@ def count_total_metals(selected_table,num):
 
                     plot_name=plot_title+".png"
                     plt.savefig(plot_name)
+                    re_select=input("Please enter anything to return to the menu to select another or quit search.")
                 except:
                     print("Invalid input. Please enter again.")
                 print("**"*20)
