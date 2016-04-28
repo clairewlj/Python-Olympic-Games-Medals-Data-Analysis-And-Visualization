@@ -44,7 +44,7 @@ def line_graph(summary_for_view,words_table):
 def bar_graph(summary_for_view,words_table):
     while True:
         print_menu(summary_for_view['Year'])
-        second_step=input("Please the index of one specific year.")
+        second_step=input("Please the index of one specific year. The graph will be saved under current directory.")
         try:
             second_step=int(second_step)
             #create the table of selected data and count the number of total medals and each type of medal

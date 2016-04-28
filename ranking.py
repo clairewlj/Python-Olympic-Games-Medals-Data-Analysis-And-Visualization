@@ -8,7 +8,7 @@ def select_subtype(choice_1,summary_for_ranking,rank_choices):
     choice_1=int(choice_1)
     while True:
         print_menu(summary_for_ranking[choice_1])
-        choice_2=input("Please enter the index of one type, or enter a to select all types and return to the previous menu, or enter q to stop selecting and return to previous menu: ")
+        choice_2=input("Please enter the index of one type, or enter a to select all types and return to the previous menu, or enter q to stop selecting and return to previous menu. If you want to select multiple, please select one at a time: ")
         if choice_2=="q" or choice_2=="Q":
             break
         elif choice_2=="a" or choice_2=="A":
@@ -32,7 +32,7 @@ def select_ranking_types(rank_row_names,summary_for_ranking):
     while True:
         print_menu(rank_row_names)
         print("**"*20)
-        choice_1=input("Please enter the index of one variable for further selecting, or enter a to select all variables and quit search, or enter q to quit searching directly: ")
+        choice_1=input("Please enter the index of one variable for further selecting, or enter a to select all variables and quit search, or enter q to quit searching directly. If you want to select multiple, please select one at a time: ")
         if choice_1=="q" or choice_1=="Q":
             break
         elif choice_1=="a" or choice_1=="A":
@@ -140,7 +140,7 @@ def count_total_metals(selected_table,num):
         elif num==3:
             #ask user to show bar chart of total/gold/silver/bronze
             print_menu(medals)
-            third_step=input("Please enter the index of the specific medal to plot a bar chart related, or enter q to quit: ")
+            third_step=input("Please enter the index of the specific medal to plot a bar chart related, or enter q to quit. The graph  will be saved under current directory: ")
             if third_step=="q" or third_step=="Q":
                 break
             else:

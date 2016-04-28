@@ -6,23 +6,31 @@ from visualization import *
 
 #ask user for choice of fine and open file
 print("This program is for analyzing data about Sports games. Files suitable for this program should include columns with the same names and order as shown below:")
+print("**"*20)
 print("'Year','City','Sport','Discipline','Event','Event Gender','Medal','NOC'")
+print("**"*20)
 print("Each type of 'Sport' consists of different types of 'Discipline', and Each type of 'Discipline' consists of different 'Event'. If you want to upload your own file, please make sure that the variables in your data file are with the same order and names strictly.")
-filenum=input("There are two files including data about medals of Olympic Games. Please enter 1 to view data about Winter Olympic Games, or enter 2 to view data about Summer Olympic Games, or upload your own file and enter the filename: ")
 while True:
+    filenum=input("There are two files including data about medals of Olympic Games. Please enter 1 to view data about Winter Olympic Games, or enter 2 to view data about Summer Olympic Games, or upload your own file and enter the filename: ")
+    print("**"*20)
     if filenum=="1":
         filename="Olympics1.csv"
+        with open(filename) as f:
+            words_lines=f.readlines()
         break
     elif filenum=="2":
         filename="Olympics2.csv"
+        with open(filename) as f:
+            words_lines=f.readlines()
         break
     else:
         try:
             filename=filenum
+            with open(filename) as f:
+                words_lines=f.readlines()
+            break
         except:
             print("Invalid input. Please enter again.")
-with open(filename) as f:
-    words_lines=f.readlines()
 
 #create table of data
 words_table=[]

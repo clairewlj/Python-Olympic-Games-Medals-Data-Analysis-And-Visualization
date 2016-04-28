@@ -17,7 +17,7 @@ def select_level1(words_table,summary_1,index_line2,levels):
     while True:
         print("No.","Variable")
         print_menu(index_line2)
-        input_level1=input("Please enter the index of the variable for further selecting, or enter 'a' to select all data and quit search, or enter q to directly quit search: ")
+        input_level1=input("Please enter the index of the variable for further selecting, or enter 'a' to select all data and quit search, or enter q to directly quit search. If you want to select multiple, please select one at a time: ")
         if input_level1=="q" or input_level1=="Q":
             break
         elif input_level1=="a" or input_level1=="A":
@@ -31,7 +31,7 @@ def select_level1(words_table,summary_1,index_line2,levels):
                         level1_name=index_line2[input_level1]
                         print("**"*20)
                         print_menu(summary_1[level1_name])
-                        input_level2=input("Please enter the index of one specific type for further selecting, or enter 'a' to select all and return to previous menu, or enter q to quit search and return to previous menu: ")
+                        input_level2=input("Please enter the index of one specific type for further selecting, or enter 'a' to select all and return to previous menu, or enter q to quit search and return to previous menu. If you want to select multiple, please select one at a time: ")
                         if input_level2=="q" or input_level2=="Q":
                             break
                         elif input_level2=="a" or input_level2=="A":
@@ -50,7 +50,7 @@ def select_level1(words_table,summary_1,index_line2,levels):
                         sport_names=list_keys(summary_1['Sport'])
                         print("**"*20)
                         print_menu(sport_names)
-                        input_level2=input("Please enter the index of one specific type of sport for further selecting. Enter 'a' to select all and return to previous menu, or enter q to select none and return to previous menu: ")
+                        input_level2=input("Please enter the index of one specific type of sport for further selecting. Enter 'a' to select all and return to previous menu, or enter q to select none and return to previous menu. If you want to select multiple, please select one at a time: ")
                         if input_level2=="q" or input_level2=="Q":
                             break
                         elif input_level2=="a" or input_level2=="A":
@@ -76,7 +76,7 @@ def select_discipline(input_level1,levels,summary_1,discipline_names,sport_name)
     while True:
         print("**"*20)
         print_menu(discipline_names)
-        input_level3=input("Please enter the index of one specific discipline for further selecting. Enter 'a' to select all and return to the previous menu, or enter q to select none and return to previous menu: ")
+        input_level3=input("Please enter the index of one specific discipline for further selecting. Enter 'a' to select all and return to the previous menu, or enter q to select none and return to previous menu. If you want to select multiple, please select one at a time: ")
         if input_level3=="q" or input_level3=="Q":
             break
         else:
@@ -101,7 +101,7 @@ def select_event(input_level1,levels,summary_1,event_names,discipline_name,sport
     while True:
         print("**"*20)
         print_menu(event_names)
-        input_level4=input("Please enter the index of one specific event to view. Enter 'a' to select all and return to the previous menu, or enter q to select none and return to previous menu: ")
+        input_level4=input("Please enter the index of one specific event to view. Enter 'a' to select all and return to the previous menu, or enter q to select none and return to previous menu. If you want to select multiple, please select one at a time: ")
         if input_level4=="q" or input_level4=="Q":
             break
         else:
